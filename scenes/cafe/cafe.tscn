@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://crdh1n80266xm"]
+
+[ext_resource type="Script" path="res://scenes/cafe/cafe.gd" id="1_ndvhf"]
+[ext_resource type="Texture2D" uid="uid://cy0bscr0v026d" path="res://assets/cafe/Cafe.png" id="2_73jw2"]
+[ext_resource type="Script" path="res://scenes/cafe/door/door.gd" id="3_ehoa5"]
+[ext_resource type="Script" path="res://scenes/cafe/table/table.gd" id="4_lffq0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rry8"]
+size = Vector2(256, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik0sf"]
+size = Vector2(885, 89)
+
+[node name="Cafe" type="Node2D"]
+script = ExtResource("1_ndvhf")
+
+[node name="CustomerSpawn" type="Marker2D" parent="."]
+position = Vector2(-211, 415)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(10, 10)
+texture = ExtResource("2_73jw2")
+metadata/_edit_lock_ = true
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2(-363, 466)
+collision_layer = 2
+script = ExtResource("3_ehoa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(118, -0.5)
+shape = SubResource("RectangleShape2D_0rry8")
+
+[node name="Table" type="Area2D" parent="."]
+position = Vector2(-54, -319)
+collision_layer = 2
+script = ExtResource("4_lffq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2(57.5, -7.5)
+shape = SubResource("RectangleShape2D_ik0sf")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]
+[connection signal="body_entered" from="Table" to="Table" method="_on_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
