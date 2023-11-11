@@ -17,7 +17,7 @@ func _ready():
 	_randomize_order()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if moving:
 		velocity.y = direction * speed
 		move_and_slide()
@@ -27,7 +27,7 @@ func _randomize_order():
 
 func _order():
 	moving = false
-	order.emit(order_type)
+	order.emit(Drink.new(order_type))
 	$Timer.start()
 
 

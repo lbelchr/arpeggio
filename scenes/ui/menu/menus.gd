@@ -1,26 +1,18 @@
-extends PanelContainer
+extends Node2D
 
-signal play(supplies: Resources)
-var supplies: Resources
+signal play(resources: Resources)
+var resources: Resources
 
 func _ready():
-	supplies = Resources.new(0, 0, 0, 0)
-	
-
-func _on_coffee_button_button_down():
-	supplies.beans += 1
-	supplies.cost += 1
-
-
-func _on_cups_button_button_down():
-	supplies.cups += 1
-	supplies.cost += 1
-
-
-func _on_cream_button_button_down():
-	supplies.cream += 1
-	supplies.cost += 1
-
+	resources = Resources.new(Resources.RESOURCE_TYPE.EMPTY)
 
 func _on_play_button_down():
-	play.emit(supplies)
+	play.emit(resources)
+
+
+func _on_item_counter_add_item(add_resource: Resources):
+	resources._add(add_resource)
+
+
+func _on_item_counter_sub_item(sub_resource):
+	resources._sub(sub_resource)

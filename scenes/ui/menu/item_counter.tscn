@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://pfaq2ip4n74v"]
+
+[ext_resource type="Script" path="res://src/counter.gd" id="1_x0uck"]
+
+[node name="ItemCounter" type="HBoxContainer" node_paths=PackedStringArray("counter", "child_label")]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 10
+script = ExtResource("1_x0uck")
+counter = NodePath("Counter")
+child_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Item Counter"
+
+[node name="SubtractButton" type="Button" parent="."]
+layout_mode = 2
+text = "-"
+
+[node name="Counter" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="AddButton" type="Button" parent="."]
+layout_mode = 2
+text = "+"
+
+[connection signal="button_down" from="SubtractButton" to="." method="_on_subtract_button_button_down"]
+[connection signal="button_down" from="AddButton" to="." method="_on_add_button_button_down"]

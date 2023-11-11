@@ -10,7 +10,7 @@ var num_customers: int
 var customer_scene: PackedScene = preload("res://scenes/cafe/customer/customer.tscn")
 
 func _ready():
-	day_stats = Resources.new(0, 0, 0, 0)
+	day_stats = Resources.new(Resources.RESOURCE_TYPE.EMPTY)
 
 func _simulate_day():
 	print("Starting Day")
@@ -33,14 +33,13 @@ func _spawn_customer():
 	add_child(customer)
 	
 	
-func _receive_order(order_type):
-	var order: Resources = Resources.new(4, 1, 1, 1 if order_type == 1 else 0)
+func _receive_order(order: Drink):
 	## send to game
 	process_order.emit(order)
 	_track_order(order)
 	
 	
-func _track_order(order: Resources):
+func _track_order(order: Drink):
 	day_stats.cost += order.cost
 	day_stats.beans += order.beans
 	day_stats.cups += order.cups

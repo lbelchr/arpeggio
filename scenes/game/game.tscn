@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bui6bib03bnhi"]
+[gd_scene load_steps=7 format=3 uid="uid://bui6bib03bnhi"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_73b66"]
-[ext_resource type="PackedScene" uid="uid://cl3ude3d7x85d" path="res://scenes/ui/top_bar/resource_container/resource_container.tscn" id="2_ornm2"]
+[ext_resource type="PackedScene" uid="uid://cl3ude3d7x85d" path="res://scenes/ui/top_bar/resource_container.tscn" id="2_ornm2"]
 [ext_resource type="Script" path="res://scenes/ui/menu/menus.gd" id="3_mruq8"]
-[ext_resource type="Script" path="res://scenes/ui/menu/supplies/coffee_amount.gd" id="4_ag2f7"]
-[ext_resource type="Script" path="res://scenes/ui/menu/supplies/cups_amount.gd" id="5_raxyr"]
-[ext_resource type="Script" path="res://scenes/ui/menu/supplies/cream_amount.gd" id="6_5pgsx"]
+[ext_resource type="PackedScene" uid="uid://pfaq2ip4n74v" path="res://scenes/ui/menu/item_counter.tscn" id="4_5w1by"]
 [ext_resource type="Script" path="res://scenes/ui/menu/supplies/cost.gd" id="7_4n43s"]
 [ext_resource type="PackedScene" uid="uid://crdh1n80266xm" path="res://scenes/cafe/cafe.tscn" id="8_kab80"]
 
@@ -28,82 +26,64 @@ theme_override_constants/margin_left = 30
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="MoneyContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("game_manager") instance=ExtResource("2_ornm2")]
+[node name="MoneyContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("source") instance=ExtResource("2_ornm2")]
 layout_mode = 2
-game_manager = NodePath("../../../../..")
-resource_type = "money"
+source = NodePath("../../../../..")
 prefix = "$"
-label_text = "Money"
 
-[node name="BeansContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("game_manager") instance=ExtResource("2_ornm2")]
+[node name="BeansContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("source") instance=ExtResource("2_ornm2")]
 layout_mode = 2
-game_manager = NodePath("../../../../..")
-resource_type = "beans"
-label_text = "Beans"
+source = NodePath("../../../../..")
+type = 1
 
-[node name="CupsContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("game_manager") instance=ExtResource("2_ornm2")]
+[node name="CupsContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("source") instance=ExtResource("2_ornm2")]
 layout_mode = 2
-game_manager = NodePath("../../../../..")
-resource_type = "cups"
-label_text = "Cups"
+source = NodePath("../../../../..")
+type = 2
 
-[node name="CreamContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("game_manager") instance=ExtResource("2_ornm2")]
+[node name="CreamContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" node_paths=PackedStringArray("source") instance=ExtResource("2_ornm2")]
 layout_mode = 2
-game_manager = NodePath("../../../../..")
-resource_type = "cream"
-label_text = "Cream"
+source = NodePath("../../../../..")
+type = 3
 
-[node name="Menu" type="PanelContainer" parent="CanvasLayer"]
+[node name="Menu" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("3_mruq8")
+
+[node name="MenuContainer" type="PanelContainer" parent="CanvasLayer/Menu"]
 offset_left = 33.0
 offset_top = 94.0
 offset_right = 990.0
 offset_bottom = 1049.0
-script = ExtResource("3_mruq8")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/MenuContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Menu/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Menu/MenuContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 30
-columns = 2
 
-[node name="CoffeeButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
+[node name="BeanCounter" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("source") instance=ExtResource("4_5w1by")]
 layout_mode = 2
-text = "Coffee Beans"
+source = NodePath("../../../..")
+type = 1
 
-[node name="Coffee Amount" type="Label" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
+[node name="CupCounter" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("source") instance=ExtResource("4_5w1by")]
 layout_mode = 2
-text = "0
-"
-script = ExtResource("4_ag2f7")
+source = NodePath("../../../..")
+type = 2
 
-[node name="CupsButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
+[node name="CreamCounter" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("source") instance=ExtResource("4_5w1by")]
 layout_mode = 2
-text = "Cups"
+source = NodePath("../../../..")
+type = 3
 
-[node name="CupsAmount" type="Label" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
-layout_mode = 2
-text = "0"
-script = ExtResource("5_raxyr")
-
-[node name="CreamButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
-layout_mode = 2
-text = "Cream"
-
-[node name="CreamAmount" type="Label" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
-layout_mode = 2
-text = "0
-"
-script = ExtResource("6_5pgsx")
-
-[node name="Play" type="Button" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
+[node name="Play" type="Button" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="Cost" type="Label" parent="CanvasLayer/Menu/MarginContainer/GridContainer"]
+[node name="Cost" type="Label" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "$0"
 script = ExtResource("7_4n43s")
@@ -118,9 +98,12 @@ offset_bottom = 935.0
 position = Vector2(455, 314)
 
 [connection signal="start_day" from="." to="CanvasLayer/World/Cafe" method="_on_game_start_day"]
-[connection signal="play" from="CanvasLayer/Menu" to="." method="_on_menus_play"]
-[connection signal="button_down" from="CanvasLayer/Menu/MarginContainer/GridContainer/CoffeeButton" to="CanvasLayer/Menu" method="_on_coffee_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/MarginContainer/GridContainer/CupsButton" to="CanvasLayer/Menu" method="_on_cups_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/MarginContainer/GridContainer/CreamButton" to="CanvasLayer/Menu" method="_on_cream_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Menu/MarginContainer/GridContainer/Play" to="CanvasLayer/Menu" method="_on_play_button_down"]
+[connection signal="play" from="CanvasLayer/Menu" to="." method="_on_menu_play"]
+[connection signal="add_item" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/BeanCounter" to="CanvasLayer/Menu" method="_on_item_counter_add_item"]
+[connection signal="sub_item" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/BeanCounter" to="CanvasLayer/Menu" method="_on_item_counter_sub_item"]
+[connection signal="add_item" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/CupCounter" to="CanvasLayer/Menu" method="_on_item_counter_add_item"]
+[connection signal="sub_item" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/CupCounter" to="CanvasLayer/Menu" method="_on_item_counter_sub_item"]
+[connection signal="add_item" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/CreamCounter" to="CanvasLayer/Menu" method="_on_item_counter_add_item"]
+[connection signal="sub_item" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/CreamCounter" to="CanvasLayer/Menu" method="_on_item_counter_sub_item"]
+[connection signal="button_down" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/Play" to="CanvasLayer/Menu" method="_on_play_button_down"]
 [connection signal="process_order" from="CanvasLayer/World/Cafe" to="." method="_on_cafe_process_order"]
