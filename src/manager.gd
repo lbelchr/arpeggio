@@ -2,9 +2,6 @@ extends Node
 
 enum DIRECTION { LEFT, RIGHT, UP, DOWN }
 
-# sim speed
-var sim_speed: int = 200
-
 # calendar
 var current_day: int
 
