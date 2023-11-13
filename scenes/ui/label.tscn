@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl3ude3d7x85d"]
+[gd_scene load_steps=3 format=3 uid="uid://cl3ude3d7x85d"]
 
-[ext_resource type="Script" path="res://src/counter.gd" id="1_ku5o3"]
+[ext_resource type="Script" path="res://scenes/ui/label.gd" id="1_ku5o3"]
+[ext_resource type="Script" path="res://scenes/ui/child_label.gd" id="2_gyby4"]
 
 [node name="ResourceContainer" type="HBoxContainer" node_paths=PackedStringArray("counter", "child_label")]
 script = ExtResource("1_ku5o3")
@@ -12,6 +13,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Label: 
 "
+script = ExtResource("2_gyby4")
 
 [node name="Counter" type="Label" parent="."]
 layout_mode = 2

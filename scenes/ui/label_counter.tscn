@@ -1,18 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://pfaq2ip4n74v"]
+[gd_scene load_steps=3 format=3 uid="uid://pfaq2ip4n74v"]
 
-[ext_resource type="Script" path="res://src/counter.gd" id="1_x0uck"]
+[ext_resource type="Script" path="res://scenes/ui/label.gd" id="1_x0uck"]
+[ext_resource type="Script" path="res://scenes/ui/child_label.gd" id="2_sbpky"]
 
 [node name="ItemCounter" type="HBoxContainer" node_paths=PackedStringArray("counter", "child_label")]
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 script = ExtResource("1_x0uck")
 counter = NodePath("Counter")
 child_label = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
-text = "Item Counter"
+script = ExtResource("2_sbpky")
 
 [node name="SubtractButton" type="Button" parent="."]
 layout_mode = 2

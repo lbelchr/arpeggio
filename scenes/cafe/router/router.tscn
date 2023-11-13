@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq24asyj4dui3"]
+
+[ext_resource type="Script" path="res://scenes/cafe/router/router.gd" id="1_dc780"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts1x7"]
+size = Vector2(30, 16)
+
+[node name="Router" type="Area2D"]
+position = Vector2(1, -17)
+script = ExtResource("1_dc780")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 17)
+shape = SubResource("RectangleShape2D_ts1x7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

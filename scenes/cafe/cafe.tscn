@@ -1,36 +1,50 @@
-[gd_scene load_steps=7 format=3 uid="uid://crdh1n80266xm"]
+[gd_scene load_steps=9 format=3 uid="uid://crdh1n80266xm"]
 
 [ext_resource type="Script" path="res://scenes/cafe/cafe.gd" id="1_ndvhf"]
-[ext_resource type="Texture2D" uid="uid://cy0bscr0v026d" path="res://assets/cafe/Cafe.png" id="2_73jw2"]
+[ext_resource type="Texture2D" uid="uid://1xkhucdjlg7b" path="res://assets/cafe/cafe-1.png" id="2_qwrj2"]
 [ext_resource type="Script" path="res://scenes/cafe/door/door.gd" id="3_ehoa5"]
 [ext_resource type="Script" path="res://scenes/cafe/table/table.gd" id="4_lffq0"]
+[ext_resource type="PackedScene" uid="uid://cq24asyj4dui3" path="res://scenes/cafe/router/router.tscn" id="5_pmsr1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rry8"]
-size = Vector2(256, 25)
+size = Vector2(116, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2sc16"]
+size = Vector2(20, 105)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ik0sf"]
-size = Vector2(885, 89)
+size = Vector2(81, 84.5)
 
 [node name="Cafe" type="Node2D"]
 script = ExtResource("1_ndvhf")
 
 [node name="CustomerSpawn" type="Marker2D" parent="."]
-position = Vector2(-211, 415)
+position = Vector2(-95, 264)
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(10, 10)
-texture = ExtResource("2_73jw2")
+scale = Vector2(6, 6)
+texture = ExtResource("2_qwrj2")
+hframes = 4
 metadata/_edit_lock_ = true
 
 [node name="Door" type="Area2D" parent="."]
-position = Vector2(-363, 466)
+position = Vector2(-140, 366)
 collision_layer = 2
 script = ExtResource("3_ehoa5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2(118, -0.5)
+position = Vector2(45, -25)
 shape = SubResource("RectangleShape2D_0rry8")
+
+[node name="Door2" type="Area2D" parent="."]
+position = Vector2(229, 150)
+collision_layer = 2
+script = ExtResource("3_ehoa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
+position = Vector2(11, -57)
+shape = SubResource("RectangleShape2D_2sc16")
 
 [node name="Table" type="Area2D" parent="."]
 position = Vector2(-54, -319)
@@ -38,12 +52,31 @@ collision_layer = 2
 script = ExtResource("4_lffq0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
-position = Vector2(57.5, -7.5)
+position = Vector2(39, 275.75)
 shape = SubResource("RectangleShape2D_ik0sf")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="RouterRight" parent="." instance=ExtResource("5_pmsr1")]
+position = Vector2(-103, 37)
+incoming_direction = 2
+outgoing_direction = 1
+
+[node name="RouterUp" parent="." instance=ExtResource("5_pmsr1")]
+position = Vector2(20, 80)
+incoming_direction = 1
+outgoing_direction = 2
+
+[node name="RouterLeft" parent="." instance=ExtResource("5_pmsr1")]
+position = Vector2(9, 124)
+incoming_direction = 3
+
+[node name="RouterDown" parent="." instance=ExtResource("5_pmsr1")]
+position = Vector2(-119, 125)
+outgoing_direction = 3
+
 [connection signal="body_entered" from="Door" to="Door" method="_on_body_entered"]
+[connection signal="body_entered" from="Door2" to="Door2" method="_on_body_entered"]
 [connection signal="body_entered" from="Table" to="Table" method="_on_body_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
