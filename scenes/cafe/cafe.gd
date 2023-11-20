@@ -3,6 +3,8 @@ extends Node2D
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var animations: AnimationPlayer = $AnimationPlayer
 
+signal finish_day
+
 var num_customers: int
 var customer_scene: PackedScene = preload("res://scenes/cafe/customer/customer.tscn")
 
@@ -33,4 +35,5 @@ func _on_spawn_timer_timeout():
 		animations.stop()
 		Manager._next_day()
 		spawn_timer.stop()
+		finish_day.emit()
 		

@@ -1,4 +1,4 @@
-extends Node2D
+extends PanelContainer
 
 signal start_day
 

@@ -11,9 +11,12 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_73b66")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1933.0
+offset_bottom = 1084.0
+color = Color(0.4, 0.223529, 0.192157, 1)
 
-[node name="TopBar" type="PanelContainer" parent="CanvasLayer"]
+[node name="TopBar" type="PanelContainer" parent="."]
 texture_filter = 1
 offset_left = 96.0
 offset_top = 64.0
@@ -21,157 +24,153 @@ offset_right = 1824.0
 offset_bottom = 160.0
 theme = ExtResource("2_4ls05")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TopBar"]
+[node name="MarginContainer" type="MarginContainer" parent="TopBar"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TopBar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="MoneyContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
+[node name="MoneyContainer" parent="TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "money"
 prefix = "$"
 label = "Money: "
 
-[node name="BeansContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
+[node name="BeansContainer" parent="TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "beans"
 label = "Beans: "
 
-[node name="CupsContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
+[node name="CupsContainer" parent="TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "cups"
 label = "Cups: "
 
-[node name="CreamContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
+[node name="CreamContainer" parent="TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "cream"
 label = "Cream: "
 
-[node name="DayContainer" parent="CanvasLayer/TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
+[node name="DayContainer" parent="TopBar/MarginContainer/HBoxContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "current_day"
 label = "Day: "
 
-[node name="Menu" type="Node2D" parent="CanvasLayer"]
-script = ExtResource("3_mruq8")
-
-[node name="MenuContainer" type="PanelContainer" parent="CanvasLayer/Menu"]
+[node name="Menu" type="PanelContainer" parent="."]
 texture_filter = 1
 offset_left = 96.0
 offset_top = 188.0
 offset_right = 912.0
 offset_bottom = 960.0
 theme = ExtResource("2_4ls05")
+script = ExtResource("3_mruq8")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/MenuContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 2
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 80
 metadata/_edit_lock_ = true
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Menu/MenuContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Menu/MarginContainer"]
 layout_mode = 2
 
-[node name="SuppliesLabel" type="Label" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="SuppliesLabel" type="Label" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "SUPPLIES:"
 
-[node name="BeanCounter" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("4_5w1by")]
+[node name="BeanCounter" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("4_5w1by")]
 layout_mode = 2
 source_property = "beans_supply"
 label = "Beans"
 
-[node name="CupCounter" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("4_5w1by")]
+[node name="CupCounter" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("4_5w1by")]
 layout_mode = 2
 source_property = "cups_supply"
 label = "Cups"
 
-[node name="CreamCounter" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("4_5w1by")]
+[node name="CreamCounter" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("4_5w1by")]
 layout_mode = 2
 source_property = "cream_supply"
 label = "Cream"
 
-[node name="Total" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
+[node name="Total" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "cost_supply"
 prefix = "$"
 label = "Total:"
 
-[node name="Play" type="Button" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="Play" type="Button" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "Start Day"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="HSeparator" type="HSeparator" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = 80
 
-[node name="DayLabel" type="Label" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="DayLabel" type="Label" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "DAY:"
 
-[node name="PrevDayProfit" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
+[node name="PrevDayProfit" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "revenue_day"
 prefix = "$"
 label = "Revenue: "
 
-[node name="PrevDayBeans" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
+[node name="PrevDayBeans" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "beans_day"
 label = "Beans: "
 
-[node name="PrevDayCups" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
+[node name="PrevDayCups" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "cups_day"
 label = "Cups: "
 
-[node name="PrevDayCream" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
+[node name="PrevDayCream" parent="Menu/MarginContainer/GridContainer" instance=ExtResource("2_ornm2")]
 layout_mode = 2
 source_property = "cream_day"
 label = "Cream: "
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="Label" type="Label" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="Label" type="Label" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "SPEED:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/MarginContainer/GridContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="Normal" type="Button" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/HBoxContainer"]
+[node name="Normal" type="Button" parent="Menu/MarginContainer/GridContainer/HBoxContainer"]
 layout_mode = 2
 text = "Normal"
 script = ExtResource("5_ks7eq")
 change_speed = 1.0
 
-[node name="Fast" type="Button" parent="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/HBoxContainer"]
+[node name="Fast" type="Button" parent="Menu/MarginContainer/GridContainer/HBoxContainer"]
 layout_mode = 2
 text = "Fast
 "
 script = ExtResource("5_ks7eq")
 change_speed = 2.0
 
-[node name="World" type="PanelContainer" parent="CanvasLayer"]
+[node name="World" type="PanelContainer" parent="."]
+texture_filter = 1
 offset_left = 1008.0
-offset_top = 300.0
+offset_top = 188.0
 offset_right = 1824.0
-offset_bottom = 972.0
+offset_bottom = 960.0
+theme = ExtResource("2_4ls05")
 
-[node name="Cafe" parent="CanvasLayer/World" instance=ExtResource("8_kab80")]
+[node name="Cafe" parent="World" instance=ExtResource("8_kab80")]
 position = Vector2(405, 336)
-metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1933.0
-offset_bottom = 1084.0
-color = Color(0.4, 0.223529, 0.192157, 1)
-
-[connection signal="start_day" from="CanvasLayer/Menu" to="CanvasLayer/World/Cafe" method="_on_menu_start_day"]
-[connection signal="button_down" from="CanvasLayer/Menu/MenuContainer/MarginContainer/GridContainer/Play" to="CanvasLayer/Menu" method="_on_play_button_down"]
+[connection signal="start_day" from="Menu" to="World/Cafe" method="_on_menu_start_day"]
+[connection signal="button_down" from="Menu/MarginContainer/GridContainer/Play" to="Menu" method="_on_play_button_down"]
+[connection signal="finish_day" from="World/Cafe" to="." method="_on_cafe_finish_day"]
